@@ -13,7 +13,7 @@
         <!--ViewFinder-->
         <scene sceneID="Oo6-Yt-rse">
             <objects>
-                <tableViewController id="8Hv-Qn-iiG" sceneMemberID="viewController">
+                <tableViewController id="8Hv-Qn-iiG" customClass="PhotoTableViewController" customModule="viewFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Ed-QU-75a">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,6 +74,9 @@
                                 <rect key="frame" x="134" y="461" width="107" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Save this Photo"/>
+                                <connections>
+                                    <action selector="savePhotoTapped:" destination="WjC-7s-tPn" eventType="touchUpInside" id="o4y-Oc-6Wx"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x8g-Vx-D1r">
                                 <rect key="frame" x="67" y="403" width="240" height="30"/>
@@ -82,7 +85,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="855a6cf5a8af752b76e97fc377403b13" translatesAutoresizingMaskIntoConstraints="NO" id="Ttz-9S-gHb">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="polaroidPic" translatesAutoresizingMaskIntoConstraints="NO" id="Ttz-9S-gHb">
                                 <rect key="frame" x="58" y="156" width="258" height="196"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -92,6 +95,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Add New Photo" id="Gk8-aC-Tnk"/>
                     <connections>
+                        <outlet property="captionText" destination="x8g-Vx-D1r" id="1hl-4B-FZb"/>
                         <outlet property="imageView" destination="Ttz-9S-gHb" id="Vyi-hN-Lay"/>
                     </connections>
                 </viewController>
@@ -119,6 +123,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="855a6cf5a8af752b76e97fc377403b13" width="500" height="474"/>
+        <image name="polaroidPic" width="500" height="474"/>
     </resources>
 </document>
