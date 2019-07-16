@@ -10,8 +10,6 @@ import UIKit
 
 class AddPhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var photos : [Photos] = []
-    
     // create object from UIImagePickerController class and store in a variable
     var imagePicker = UIImagePickerController()
     
@@ -29,15 +27,6 @@ class AddPhotoViewController: UIViewController, UIImagePickerControllerDelegate,
         
     }
     
-    func getPhotos() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            
-            if let coreDataPhotos = try? context.fetch(Photos.fetchRequest()) as? [Photos] {
-                    photos = coreDataPhotos
-                    tableView.reloadData()
-            }
-        }
-    }
     
     @IBAction func albumsTapped(_ sender: Any) {
         imagePicker.sourceType = .savedPhotosAlbum

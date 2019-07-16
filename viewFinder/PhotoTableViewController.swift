@@ -10,9 +10,23 @@ import UIKit
 
 class PhotoTableViewController: UITableViewController {
 
+    var photos : [Photos] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+        func getPhotos() {
+            if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                
+                if let coreDataPhotos = try? context.fetch(Photos.fetchRequest()) as? [Photos] {
+                    photos = coreDataPhotos
+                    tableView.reloadData()
+                    
+                }
+            }
 
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -21,11 +35,10 @@ class PhotoTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return photos.count
     }
 
 
@@ -33,14 +46,22 @@ class PhotoTableViewController: UITableViewController {
         //cell is each row in the table
         let cell = UITableViewCell()
         
+        let cellPhoto = photos[indexPath.row]
         //text next the the pic on the table view
-        cell.textLabel?.text = "placeholder text"
+        cell.textLabel?.text = cellPhoto.caption
         //little picture in the table view
-        cell.imageView?.image = UIImage(named: "polaroidPic")
-
+        
+        if let cellPhotoImageData = cellPhoto.imageData {
+            if let cellPhotoImage = UIImage(data: cellPhotoImageData) {
+                cell.imageView?.image = cellPhotoImage
+            }
         // Configure the cell...
-
+        }
         return cell
+}
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getPhotos()
     }
 
 
@@ -88,5 +109,6 @@ class PhotoTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
 
 }
