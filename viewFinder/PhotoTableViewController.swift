@@ -12,10 +12,35 @@ class PhotoTableViewController: UITableViewController {
 
     var photos : [Photos] = []
     
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "moveToDetail", sender: photos[indexPath.row])
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
+    
+
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "moveToDetail" {
+            // need to get access to View Controller we want to move to
+            if let photoDetailView = segue.destination as? PhotoDetailViewController {
+                // now we need to say, whichever row was tapped, take that photo
+                // and send it to the over view
+                if let photoToSend = sender as? Photos {
+                    photoDetailView.photo = photoToSend
+                }
+                
+        }
+        
+    }
+}
+    
+    
         func getPhotos() {
             if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
                 
